@@ -1,3 +1,1 @@
-# budgetor
-# projects
 # currentProjects
