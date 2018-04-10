@@ -1,0 +1,225 @@
+Dropzone.options.DropZoneFiddle = {
+  url: this.location,
+  paramName: "file", //the parameter name containing the uploaded file
+  clickable: true,
+  maxFilesize: 10, //in mb
+  uploadMultiple: true,
+  maxFiles: 10, // allowing any more than this will stress a basic php/mysql stack
+  addRemoveLinks: true,
+  acceptedFiles: '.png,.jpg', //allowed filetypes
+  dictDefaultMessage: "Upload your files here", //override the default text
+  init: function() {
+    this.on("sending", function(file, xhr, formData) {
+    });
+    this.on("success", function(file, responseText) {
+      alert('done');
+    });
+    this.on("addedfile", function(file){
+  		handleFileSelect(file)
+		this.fileElement = document.getElementById('DropZoneFiddle');
+		totalFiles = this.fileElement.dropzone.files.length
+  	});
+  }
+};
+ sessionStorage.setItem('supplierVendorRelationships', JSON.stringify(supplierVendorArray))
+ var spreadSheetToFilter = []
+ //get the files contents
+  function handleFileSelect(evt) {
+    var file = evt
+    Papa.parse(file, {
+      header: true,
+      dynamicTyping: true,
+      complete: function(results) {
+        data = results;
+		    spreadSheetToFilter.push(data.data)
+      }
+    });
+	if(data !== undefined){
+		let filteredSpreadsheet = separateByBrand(spreadSheetToFilter[0])
+		let moneyParsedArray = arrayCycler(filteredSpreadsheet, moneyParser)
+		setTable(duplicateFreeSheet)
+	}
+}
+
+// Name:"2 BE SEEN/GEORGIANO"
+// Vendor #:33930
+// DRESSBARN
+// JUSTICE
+// LANE BRYANT
+// MAURICES
+// CATHERINES
+
+
+
+
+// "":126422
+// amount:"$24,549.75"
+// brand:"DRESSBARN"
+// date:"10/30/2017"
+// factory merch id:5315
+// factory name:"GUANGZHOU SHANGDA LEATHER CO., LTD."
+// qty:"3,637"
+// vendor name:"ACCESSORIES DIRECT INT'L USA INC."
+// vendor/merchid:49
+// let brandName = spreadsheetToCheck.brand
+// let amount = spreadsheetToCheck.brand
+// let factoryName = spreadsheetToCheck.brand
+// let date = spreadsheetToCheck.brand
+// let vendorName = spreadsheetToCheck.brand
+let separateByBrand = (spreadsheetToCheck) => {
+  let separatedBrandObject = {
+    dressBarnArray : [],
+    justiceArray : [],
+    laneBryantArray : [],
+    mauriceArray : [],
+    catherinesArray : []
+  }
+  _.each(spreadsheetToCheck, function(row){
+    let brandName = row.brand
+      if(brandName == 'DRESSBARN'){
+        separatedBrandObject.dressBarnArray.push(row)
+      }
+      if(brandName == 'JUSTICE'){
+        separatedBrandObject.justiceArray.push(row)
+      }
+      if(brandName == 'LANE BRYANT'){
+        separatedBrandObject.laneBryantArray.push(row)
+      }
+      if(brandName == 'MAURICES'){
+        separatedBrandObject.mauriceArray.push(row)
+      }
+      if(brandName == 'CATHERINES'){
+        separatedBrandObject.catherinesArray.push(row)
+      }
+    })
+    return separatedBrandObject
+  }
+
+
+
+function arrayCycler(arraysObject,functionToExecute){
+    _.each(arraysObject,function(array)){
+      functionToExecute(array)
+    }
+  }
+
+
+
+function moneyParser(arrayToParse){
+    let moneyParsedArray = _.each(arrayToParse, function(objectToParse){
+      let amountToParse = objectToParse.amount
+      let parsedAmount = objectToParse.amount.replace(',','')
+      objectToParse.amount = parsedAmount
+    })
+    return moneyParsedArray
+  }
+
+
+
+
+
+
+function duplicateChecker(filteredData){
+    var uniqueObjects = _.uniq(filteredData, function(elem){
+      var concatenatedProperties =  JSON.stringify(elem['Supplier Name'] + elem['Brand Name'] + elem['Brand Relationship ID'])
+      var concatenatedProperties_nonString =  elem['Supplier Name'] + elem['Brand Name'] + elem['Brand Relationship ID']
+      return concatenatedProperties
+    })
+    var newArr = _.filter(uniqueObjects, function(o) {
+      if(o['Brand Relationship ID']){
+        var isDup =  (o['Brand Relationship ID'].toString()).slice(0,3) !== '200'
+        return isDup
+      }
+    });
+    return commaRemover(newArr)
+	}
+  //place the contents in a table
+
+function commaRemover(incomingInformation){
+  var commasRemoved = _.each(incomingInformation, function(elem){
+                            var foundCommas = elem['Supplier Name'].indexOf(',') !== -1
+                            if(foundCommas){
+                              var nameWithoutCommas = elem['Supplier Name'].replace(",", "")
+                              elem['Supplier Name'] = nameWithoutCommas
+                              return elem
+                            }
+                            else return elem
+                          });
+                          return commasRemoved
+                        }
+
+/*
+Brand Name:"Maurices"
+Brand Relationship ID:33930
+Supplier Name:"2 BE SEEN/GEORGIANO"
+matchingStatus:
+"not matched"
+relationShipStatus:"tbd"
+*/
+function setTable(completedSpreadSheetInformation) {
+  var table = document.getElementById("informationTable");
+  var exceptionsTable = document.getElementById("exceptional_information");
+  var newTable = _.each(completedSpreadSheetInformation, function(elem3){
+      if(elem3.matchingStatus == 'not matched'){
+        var exceptionsRow = exceptionsTable.insertRow(1);
+        var cell7 = exceptionsRow.insertCell(0)
+        cell7.innerHTML = elem3['Brand Relationship ID']
+      }
+      if(elem3.matchingStatus == 'matched'){
+        var row = table.insertRow(1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(0);
+        var cell3 = row.insertCell(0);
+        var cell4 = row.insertCell(0);
+        cell1.innerHTML = elem3['Supplier Name']
+        cell2.innerHTML = elem3['Brand Name']
+        cell3.innerHTML = elem3['Brand Relationship ID']
+        cell4.innerHTML = elem3.relationShipStatus
+      }
+    })
+}
+
+document.getElementById('downloadButton').onclick = function checkDataDisaster(){
+  var today = new Date();
+  var h = today.getHours();
+  var m = today.getMinutes();
+  var s = today.getSeconds();
+  var day = today.getDay();
+  var date = today.getDate();
+  var year = today.getFullYear();
+  var month = today.getMonth();
+  var monArray = [0,"JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
+  var week = [0,"MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY","SUNDAY"]
+  var time = [0,1,2,3,4,5,6,7,8,9,10,11,12,1,2,3,4,5,6,7,8,9,10,11,12]
+		exp('standardized_report|'+(month+1)+'/'+date+'.csv');
+}
+function exp(filename){
+var mainInfo = [];
+var allRow = document.querySelectorAll("tr");
+	for(q=0;q<allRow.length;q++){
+		var singleRow = [];
+		var lengthOfColumns = allRow[q].querySelectorAll("td");
+		for (h=0;h<lengthOfColumns.length; h++){
+			singleRow.push(lengthOfColumns[h].innerText)
+		}
+		mainInfo.push(singleRow.join(","));
+	}
+		downloadCSV(mainInfo.join("\n"), filename);
+
+	}
+
+function downloadCSV(csv, filename){
+var csvFileSpace;
+var downloadLink;
+csvFileSpace = new Blob([csv], {type:"text/csv"});
+downloadLink = document.createElement("a");
+downloadLink.download = filename;
+downloadLink.href = window.URL.createObjectURL(csvFileSpace);
+downloadLink.style.display = "none";
+document.body.appendChild(downloadLink);
+downloadLink.click();
+}
+
+
+/////////////////////////////////////////////////////////
+var supplierVendorArray = [{"Brand Relationship ID":33930,"Supplier Name":"2 BE SEEN/GEORGIANO","Brand Name":"Maurices"}]
