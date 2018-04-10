@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.3.7/papaparse.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.js'></script>
+  </head>
+  <body>
+    <form action="" class="dropzone" id="DropZoneFiddle">
+      <span class="glyphicon glyphicon-download"></span>
+      <br/>
+    </form>
+    <button id='downloadButton'>Download</button>
+    </br>
+    </br>
+    <table id='informationTable'>
+      <tr>
+        <td id="supplier_name">Supplier Name</td>
+        <td id="vendor_name">Brand Name</td>
+        <td id="supplier_vendor_relationship_id">Brand Relationship ID</td>
+        <td id="supplier_vendor_relationship_status">Brand Relationship Status</td>
+      </tr>
+    </table>
+    <table id='exceptional_information'>
+      <tr>
+        <td>Information Without a Match<td>
+      </tr>
+    </table>
+    <link rel="stylesheet" type="text/css" href="css/index.css"></link>
+    <script src="js/index.js"></script>
+  </body>
+</html>
