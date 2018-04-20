@@ -1,0 +1,641 @@
+<html>
+	<head>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src = "https://code.jquery.com/jquery-2.1.3.min.js" type = "text/javascript"></script>
+		<script src="https://fastcdn.org/Underscore.js/1.8.3/underscore-min.js"></script>
+		<script src = "https://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js" type = "text/javascript"></script>
+	</head>
+	<style>
+		@keyframes rotateRight {
+			from {
+				transform: rotateZ(0deg);
+			}
+			to {
+				transform: rotateZ(360deg);
+			}
+		}
+		@keyframes rotateLeft {
+			from {
+				transform: rotateZ(360deg);
+			}
+			to {
+				transform: rotateZ(0deg);
+			}
+		}
+	</style>
+<body>
+	<div id='banner_placeholder'></div>
+	<div id="banner"></div>
+		<div id="buttons_div"></div>
+		<div id="cube_div"></div>
+		<script type="text/babel">
+			class RotatingCircles extends React.Component{
+				constructor(props){
+					super(props)
+					this.state = {
+						videoDimensions : {
+							height : '0%',
+							width : '0%'
+						},
+						wrapperStyle : {
+							position : 'fixed',
+							height : '100%',
+							width : '100%',
+							opacity : '1',
+							background : 'yellow'
+						},
+						wrapper2Style : {
+							position : 'fixed',
+							height : '100%',
+							width : '100%',
+							opacity : '1',
+							background : 'radial-gradient(white, black)'
+						},
+						innerCircle : {
+							position : 'fixed',
+							transition: 'all 4s ease-in',
+							borderRadius : '100%',
+							top : '42.5%',
+							right : '46%',
+							height : '15%',
+							width : '8%',
+							opacity : '1',
+						    borderWidth : '2px',
+						    borderStyle : 'outset',
+    						boxShadow : '1px 4px',
+   							borderColor: 'silver',
+							background : 'blue'
+						},
+						outerCircle1 : {
+							position : 'fixed',
+							borderRadius : '100%',
+							bottom : '40%',
+							right : '44.5%',
+							height : '20%',
+							width : '11%',
+							opacity : '1',
+    						boxShadow: '100px black',
+						    borderWidth : '2px',
+						    borderStyle : 'outset',
+    						boxShadow : '1px 4px',
+   							borderColor: 'silver',
+							background : 'green'
+						},
+						outerCircle2 : {
+							position : 'fixed',
+							borderRadius : '100%',
+							top : '37.5%',
+							right : '43%',
+							height : '25%',
+							width : '14%',
+						    borderWidth : '2px',
+						    borderStyle : 'outset',
+    						boxShadow : '3px 3px 3px 3px',
+   							borderColor: 'silver',
+							opacity : '1',
+							background : 'red'
+						},
+						outerCircle3 : {
+							position : 'fixed',
+							borderRadius : '100%',
+							top : '35%',
+							left : '41.5%',
+							height : '30%',
+							width : '17%',
+						    borderWidth : '2px',
+						    borderStyle : 'outset',
+    						boxShadow : '3px 3px 3px 3px',
+   							borderColor: 'silver',
+							opacity : '1',
+							background : 'purple'
+						},
+						imgBoxStyle1 : {
+							top : '0',
+							left : '0',
+							width : '0',
+							height : '0',
+							opacity : '0'
+						},
+						imgBoxStyle2 : {
+							top : '0',
+							left : '0',
+							width : '0',
+							height : '0',
+							opacity : '0'
+						},
+						imgBoxStyle3 : {
+							top : '0',
+							left : '0',
+							width : '0',
+							height : '0',
+							opacity : '0'
+						},
+						imgBoxStyle4 : {
+							top : '0',
+							left : '0',
+							width : '0',
+							height : '0',
+							opacity : '0'
+						},
+						imgBoxStyle5 : {
+							top : '0',
+							left : '0',
+							width : '0',
+							height : '0',
+							opacity : '0'
+						}
+					}
+					this.startHomePage = this.startHomePage.bind(this)
+				}
+				innerCircleClick = () => {
+					this.setState({
+						innerCircle : {
+							position : 'fixed',
+							borderRadius : '100%',
+							top : '42.5%',
+							right : '46%',
+							height : '15%',
+							width : '8%',
+							opacity : '1',
+						    borderWidth : '2px',
+						    borderStyle : 'inset',
+    						boxShadow : '1px white',
+   							borderColor: 'silver',
+							background : 'black',
+							transition: 'all 1s ease-out'
+						},
+						outerCircle1 : {
+							position : 'fixed',
+							borderRadius : '100%',
+							bottom : '40%',
+							right : '44.5%',
+							height : '20%',
+							width : '11%',
+							opacity : '1',
+						    borderWidth : '2px',
+						    borderStyle : 'inset',
+    						boxShadow : '1px 1px',
+   							borderColor: 'silver',
+							background : 'white',
+							transitionDelay: '1s',
+							transitionDuration : '2s'
+						},
+						outerCircle2 : {
+							position : 'fixed',
+							borderRadius : '100%',
+							top : '37.5%',
+							right : '43%',
+							height : '25%',
+							width : '14%',
+						    borderWidth : '2px',
+						    borderStyle : 'outset',
+    						boxShadow : '3px 3px 3px 3px',
+   							borderColor: 'silver',
+							background : 'black',
+							transitionDelay: '2s',
+							transitionDuration : '3s'
+						},
+						outerCircle3 : {
+							position : 'fixed',
+							borderRadius : '100%',
+							top : '35%',
+							left : '41.5%',
+							height : '30%',
+							width : '17%',
+						    borderWidth : '2px',
+						    borderStyle : 'outset',
+    						boxShadow : '3px 3px 3px 3px',
+   							borderColor: 'silver',
+							opacity : '1',
+							background : 'white',
+							transitionDelay: '4s',
+							transitionDuration : '3s'
+						},
+						wrapperStyle : {
+							position : 'fixed',
+							height : '100%',
+							width : '100%',
+							opacity : '1',
+							background : 'black',
+							transitionDelay: '5s',
+							transitionDuration : '7s'
+						}
+					})
+					this.transitionToHomePage = true
+				}
+				startHomePage = () =>{
+					if(this.transitionToHomePage == true){
+					var video = document.getElementById('video')
+					video.loop = true
+					video.autoplay = true
+					video.muted = true
+					video.setAttribute('position', 'fixed')
+					video.setAttribute('height', '100%')
+					video.setAttribute('width', '100%')
+						setTimeout(function() {
+							this.setState({
+								videoDimensions : {
+									position : 'fixed',
+									height : '100%',
+									width : '100%'
+								},
+								innerCircle : {
+									position : 'fixed',
+									top : '0%',
+									right : '0%',
+									height : '5%',
+									width : '100%',
+									opacity : '1',
+								    borderWidth : '2px',
+								    borderStyle : 'inset',
+		    						boxShadow : '1px white',
+		   							borderColor: 'silver',
+									background : 'white',
+									transition: 'all 4s ease-in',
+									transitionDuration : '4s'
+								},
+								outerCircle1 : {
+									position : 'fixed',
+									borderRadius : '0%',
+									bottom : '0%',
+									right : '0%',
+									height : '15%',
+									width : '100%',
+									opacity : '1',
+								    borderWidth : '2px',
+								    borderStyle : 'inset',
+		    						boxShadow : '1px 1px',
+		   							borderColor: 'silver',
+									background : 'white',
+									transition: 'all 4s ease-in',
+									transitionDuration : '4s'
+								},
+								outerCircle2 : {
+									position : 'fixed',
+									borderRadius : '0%',
+									top : '5%',
+									right : '0%',
+									height : '85%',
+									width : '40%',
+								    borderWidth : '2px',
+								    borderStyle : 'outset',
+		    						boxShadow : '3px 3px 3px 3px',
+		   							borderColor: 'silver',
+									background : 'black',
+									transitionDelay: '4s',
+									transition: 'all 4s ease-in',
+									transitionDuration : '4s'
+								},
+								outerCircle3 : {
+									position : 'fixed',
+									borderRadius : '0%',
+									top : '10%',
+									left : '0%',
+									height : '35%',
+									width : '60%',
+								    borderWidth : '2px',
+								    borderStyle : 'outset',
+		    						boxShadow : '3px 3px 3px 3px',
+		   							borderColor: 'silver',
+									opacity : '1',
+									background : 'white',
+									transitionDelay: '4s',
+									transition: 'all 4s ease-in',
+									transitionDuration : '4s'
+								},
+							})
+						this.readyForImages = true
+						this.startImageBoxes()
+						}.bind(this), 7000);
+					}
+				}
+
+				startImageBoxes = () => {
+					if(this.readyForImages == true){
+						setTimeout(function() {
+							this.setState({
+								imgBoxStyle1 : {
+									position: 'relative',
+									top : '5%',
+									left : '4%',
+									width : '20%',
+									height : '50%',
+									backgroundImage: "url('http://78.media.tumblr.com/af5167b7190ed722566528b98c7f3590/tumblr_o0v7k5TAW81teue7jo1_1280.jpg')",
+								    borderWidth : '2px',
+								    borderStyle : 'outset',
+		    						boxShadow : '3px 3px 3px 3px',
+		   							borderColor: 'silver',
+									opacity : '1',
+									transitionDelay: '1s',
+									transition: 'all 1s ease-in',
+									transitionDuration : '1s'
+								},
+								imgBoxStyle2 : {
+									position: 'relative',
+									bottom : '7%',
+									left : '28%',
+									width : '20%',
+									height : '50%',
+									backgroundImage: "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFqLH1H2eYUP9bfvzF-Iz8CLdzghh72f1Vm17l7GD4KhbHbNjI')",
+								    borderWidth : '2px',
+								    borderStyle : 'outset',
+		    						boxShadow : '3px 3px 3px 3px',
+		   							borderColor: 'silver',
+									opacity : '1',
+									transitionDelay: '2s',
+									transition: 'all 2s ease-in',
+									transitionDuration : '2s'
+								},
+								imgBoxStyle3 : {
+									position: 'relative',
+									top : '-95%',
+									left : '53%',
+									width : '20%',
+									height : '50%',
+									backgroundImage: "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLT02zB6ZoRLAkGYqaUZYeRSkq8Q19zyH3YUq-uRYGdrtJ_sj4DQ')",
+								    borderWidth : '2px',
+								    borderStyle : 'outset',
+		    						boxShadow : '3px 3px 3px 3px',
+		   							borderColor: 'silver',
+									opacity : '1',
+									transitionDelay: '3s',
+									transition: 'all 3s ease-in',
+									transitionDuration : '3s'
+								},
+								imgBoxStyle4 : {
+									position: 'relative',
+									top : '-107%',
+									left : '77%',
+									width : '20%',
+									height : '50%',
+									backgroundImage: "url('https://vignette.wikia.nocookie.net/animal-jam-clans-1/images/a/a3/Header-photo-the-dirt.jpg/revision/latest?cb=20160319235120')",
+								    borderWidth : '2px',
+								    borderStyle : 'outset',
+		    						boxShadow : '3px 3px 3px 3px',
+		   							borderColor: 'silver',
+									opacity : '1',
+									transitionDelay: '4s',
+									transition: 'all 4s ease-in',
+									transitionDuration : '4s'
+								},
+								imgBoxStyle5 : {
+									position: 'relative',
+									top : '-215%',
+									left : '0%',
+									width : '100%',
+									height : '15%',
+									backgroundImage: "url('http://www.capstoneinfrastructure.com/Assets/Gallery/Website%20Enhancement/Goulais%20Bay/Beautiful%20sky.jpg')",
+								    borderWidth : '2px',
+								    borderStyle : 'outset',
+		    						boxShadow : '3px 3px 3px 3px',
+		   							borderColor: 'silver',
+									opacity : '1',
+									transitionDelay: '5s',
+									transition: 'all 5s ease-in',
+									transitionDuration : '5s'
+								}
+							})
+						}.bind(this), 2000);
+					}
+				}
+				imageBox1OnHover = () => {
+					this.setState({
+						imgBoxStyle1 : {
+							position: 'relative',
+							top : '5%',
+							left : '4%',
+							width : '20%',
+							height : '50%',
+							background : 'red',
+						    borderWidth : '2px',
+						    borderStyle : 'inset',
+    						boxShadow : '5px 5px 5px 5px',
+   							borderColor: 'silver'
+						}
+					})
+				}
+				imageBox2OnHover = () => {
+					this.setState({
+						imgBoxStyle2 : {
+							position: 'relative',
+							bottom : '7%',
+							left : '28%',
+							width : '20%',
+							height : '50%',
+							background : 'purple',
+						    borderWidth : '2px',
+						    borderStyle : 'inset',
+    						boxShadow : '5px 5px 5px 5px',
+   							borderColor: 'silver'
+						}
+					})
+				}
+				imageBox3OnHover = () => {
+					this.setState({
+						imgBoxStyle3 : {
+							position: 'relative',
+							top : '-95%',
+							left : '53%',
+							width : '20%',
+							height : '50%',
+							background : 'orange',
+						    borderWidth : '2px',
+						    borderStyle : 'inset',
+    						boxShadow : '5px 5px 5px 5px',
+							borderColor: 'silver'
+						}
+					})
+					var video = document.getElementById('video')
+					video.setAttribute('src', 'C:\Users\BAdams1\Desktop\siteFolder\mp4s\water.mp4.mp4')
+				}
+				imageBox4OnHover = () => {
+					this.setState({
+						imgBoxStyle4 : {
+							position: 'relative',
+							top : '-107%',
+							left : '77%',
+							width : '20%',
+							height : '50%',
+							background : 'green',
+						    borderWidth : '2px',
+						    borderStyle : 'inset',
+    						boxShadow : '5px 5px 5px 5px',
+								borderColor: 'silver'
+						}
+					})
+				}
+				imageBox5OnHover = () => {
+					this.setState({
+						imgBoxStyle5 : {
+							position: 'relative',
+							top : '-215%',
+							left : '0%',
+							width : '100%',
+							height : '15%',
+							background : 'blue',
+						    borderWidth : '2px',
+						    borderStyle : 'inset',
+    						boxShadow : '5px 5px 5px 5px',
+   							borderColor: 'silver'
+						}
+					})
+				}
+				imageBox1HoverOut = () => {
+					this.setState({
+						imgBoxStyle1 : {
+							position: 'relative',
+							top : '5%',
+							left : '4%',
+							width : '20%',
+							height : '50%',
+							background : 'red',
+						    borderWidth : '2px',
+						    borderStyle : 'outset',
+    						boxShadow : '3px 3px 3px 3px',
+   							borderColor: 'silver'
+						}
+					})
+				}
+				imageBox2HoverOut = () => {
+					this.setState({
+						imgBoxStyle2 : {
+							position: 'relative',
+							bottom : '7%',
+							left : '28%',
+							width : '20%',
+							height : '50%',
+							background : 'purple',
+						    borderWidth : '2px',
+						    borderStyle : 'outset',
+    						boxShadow : '3px 3px 3px 3px',
+   							borderColor: 'silver'
+						}
+					})
+				}
+				imageBox3HoverOut = () => {
+					this.setState({
+						imgBoxStyle3 : {
+							position: 'relative',
+							top : '-95%',
+							left : '53%',
+							width : '20%',
+							height : '50%',
+							background : 'orange',
+						    borderWidth : '2px',
+						    borderStyle : 'outset',
+							boxShadow : '3px 3px 3px 3px',
+							borderColor: 'silver'
+						}
+					})
+				}
+				imageBox4HoverOut = () => {
+					this.setState({
+						imgBoxStyle4 : {
+							position: 'relative',
+							top : '-107%',
+							left : '77%',
+							width : '20%',
+							height : '50%',
+							background : 'green',
+						    borderWidth : '2px',
+						    borderStyle : 'outset',
+							boxShadow : '3px 3px 3px 3px',
+								borderColor: 'silver'
+						}
+					})
+				}
+				imageBox5HoverOut = () => {
+					this.setState({
+						imgBoxStyle5 : {
+							position: 'relative',
+							top : '-215%',
+							left : '0%',
+							width : '100%',
+							height : '15%',
+							background : 'blue',
+						    borderWidth : '2px',
+						    borderStyle : 'outset',
+    						boxShadow : '3px 3px 3px 3px',
+   							borderColor: 'silver'
+						}
+					})
+				}
+
+					componentDidMount() {
+					}
+					componentWillReceiveProps(newProps) {
+					}
+					shouldComponentUpdate(newProps, newState) {
+					return true;
+					}
+					componentWillUpdate(nextProps, nextState) {
+					}
+					componentDidUpdate(prevProps, prevState) {
+						this.startHomePage()
+					}
+					componentWillUnmount() {
+			   		}
+
+				render(){
+					return (
+						<div id='wrapper2' style={this.state.wrapperStyle}>
+							<div id='div1' style={this.state.outerCircle3}>
+								<div onMouseLeave={this.imageBox1HoverOut} onMouseEnter={this.imageBox1OnHover} style={this.state.imgBoxStyle1} id='imgBox1'></div>
+								<div onMouseLeave={this.imageBox2HoverOut} onMouseEnter={this.imageBox2OnHover} style={this.state.imgBoxStyle2} id='imgBox2'></div>
+								<div onMouseLeave={this.imageBox3HoverOut} onMouseEnter={this.imageBox3OnHover} style={this.state.imgBoxStyle3} id='imgBox3'></div>
+								<div onMouseLeave={this.imageBox4HoverOut} onMouseEnter={this.imageBox4OnHover} style={this.state.imgBoxStyle4} id='imgBox4'></div>
+								<div onMouseLeave={this.imageBox5HoverOut} onMouseEnter={this.imageBox5OnHover} style={this.state.imgBoxStyle5} id='imgBox5'></div>
+							</div>
+							<div id='div2' style={this.state.outerCircle2}>
+								<video id='video'>
+					        <source id='mp4' src="http://media.w3.org/2010/05/sintel/trailer.mp4" type='video/mp4'/>
+					      </video>
+							</div>
+							<div id='div3' style={this.state.outerCircle1}>
+							</div>
+							<div id='div4' onClick={this.innerCircleClick} style={this.state.innerCircle}>
+							</div>
+						</div>
+					)
+				}
+			}
+			class Banner extends React.Component{
+				constructor(props){
+					super(props)
+				}
+				render(){
+					return(
+						<div id='homePage'>
+							<div id='banner'>
+								<div>
+									<table>
+										<td>
+											<button>aaa</button>
+										</td>
+										<td>
+											<button>aaa</button>
+										</td>
+										<td>
+											<button>aaa</button>
+										</td>
+									</table>
+								</div>
+							</div>
+							<div id='homePageBody'>
+
+							</div>
+						</div>
+					)
+				}
+			}
+			ReactDOM.render(<RotatingCircles />, document.body)
+		</script>
+	</body>
+</html>
