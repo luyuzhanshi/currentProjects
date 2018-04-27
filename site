@@ -40,9 +40,10 @@
 				constructor(props){
 					super(props)
 					this.state = {
-						videoDimensions : {
+						returnButton : {
 							height : '0%',
-							width : '0%'
+							width : '0%',
+							opacity: '0'
 						},
 						wrapperStyle : {
 							position : 'fixed',
@@ -67,10 +68,10 @@
 							height : '15%',
 							width : '8%',
 							opacity : '1',
-						    borderWidth : '2px',
-						    borderStyle : 'outset',
-    						boxShadow : '1px 4px',
-   							borderColor: 'silver',
+					    borderWidth : '2px',
+					    borderStyle : 'outset',
+  						boxShadow : '1px 4px',
+ 							borderColor: 'silver',
 							background : 'blue'
 						},
 						outerCircle1 : {
@@ -81,11 +82,11 @@
 							height : '20%',
 							width : '11%',
 							opacity : '1',
-    						boxShadow: '100px black',
-						    borderWidth : '2px',
-						    borderStyle : 'outset',
-    						boxShadow : '1px 4px',
-   							borderColor: 'silver',
+  						boxShadow: '100px black',
+					    borderWidth : '2px',
+					    borderStyle : 'outset',
+  						boxShadow : '1px 4px',
+ 							borderColor: 'silver',
 							background : 'green'
 						},
 						outerCircle2 : {
@@ -95,10 +96,10 @@
 							right : '43%',
 							height : '25%',
 							width : '14%',
-						    borderWidth : '2px',
-						    borderStyle : 'outset',
-    						boxShadow : '3px 3px 3px 3px',
-   							borderColor: 'silver',
+					    borderWidth : '2px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
 							opacity : '1',
 							background : 'red'
 						},
@@ -109,10 +110,10 @@
 							left : '41.5%',
 							height : '30%',
 							width : '17%',
-						    borderWidth : '2px',
-						    borderStyle : 'outset',
-    						boxShadow : '3px 3px 3px 3px',
-   							borderColor: 'silver',
+					    borderWidth : '2px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
 							opacity : '1',
 							background : 'purple'
 						},
@@ -153,6 +154,7 @@
 						}
 					}
 					this.startHomePage = this.startHomePage.bind(this)
+					this.returnImages = this.returnImages.bind(this)
 				}
 				innerCircleClick = () => {
 					this.setState({
@@ -164,10 +166,10 @@
 							height : '15%',
 							width : '8%',
 							opacity : '1',
-						    borderWidth : '2px',
-						    borderStyle : 'inset',
-    						boxShadow : '1px white',
-   							borderColor: 'silver',
+					    borderWidth : '2px',
+					    borderStyle : 'inset',
+  						boxShadow : '1px white',
+ 							borderColor: 'silver',
 							background : 'black',
 							transition: 'all 1s ease-out'
 						},
@@ -179,10 +181,10 @@
 							height : '20%',
 							width : '11%',
 							opacity : '1',
-						    borderWidth : '2px',
-						    borderStyle : 'inset',
-    						boxShadow : '1px 1px',
-   							borderColor: 'silver',
+					    borderWidth : '2px',
+					    borderStyle : 'inset',
+  						boxShadow : '1px 1px',
+ 							borderColor: 'silver',
 							background : 'white',
 							transitionDelay: '1s',
 							transitionDuration : '2s'
@@ -194,10 +196,10 @@
 							right : '43%',
 							height : '25%',
 							width : '14%',
-						    borderWidth : '2px',
-						    borderStyle : 'outset',
-    						boxShadow : '3px 3px 3px 3px',
-   							borderColor: 'silver',
+					    borderWidth : '2px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
 							background : 'black',
 							transitionDelay: '2s',
 							transitionDuration : '3s'
@@ -209,10 +211,10 @@
 							left : '41.5%',
 							height : '30%',
 							width : '17%',
-						    borderWidth : '2px',
-						    borderStyle : 'outset',
-    						boxShadow : '3px 3px 3px 3px',
-   							borderColor: 'silver',
+					    borderWidth : '2px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
 							opacity : '1',
 							background : 'white',
 							transitionDelay: '4s',
@@ -232,19 +234,19 @@
 				}
 				startHomePage = () =>{
 					if(this.transitionToHomePage == true){
-					var video = document.getElementById('video')
-					video.loop = true
-					video.autoplay = true
-					video.muted = true
-					video.setAttribute('position', 'fixed')
-					video.setAttribute('height', '100%')
-					video.setAttribute('width', '100%')
+						this.transitionToHomePage = false
 						setTimeout(function() {
 							this.setState({
-								videoDimensions : {
-									position : 'fixed',
-									height : '100%',
-									width : '100%'
+								returnButton : {
+									height: '15%',
+									width: '30%',
+									opacity: '0.5',
+									top: '85%',
+									left: '0%',
+									background: 'blue',
+									transition: 'all 4s ease-in',
+									transitionDuration : '4s',
+									position: 'fixed'
 								},
 								innerCircle : {
 									position : 'fixed',
@@ -253,10 +255,10 @@
 									height : '5%',
 									width : '100%',
 									opacity : '1',
-								    borderWidth : '2px',
-								    borderStyle : 'inset',
-		    						boxShadow : '1px white',
-		   							borderColor: 'silver',
+							    borderWidth : '2px',
+							    borderStyle : 'inset',
+	    						boxShadow : '1px white',
+	   							borderColor: 'silver',
 									background : 'white',
 									transition: 'all 4s ease-in',
 									transitionDuration : '4s'
@@ -267,12 +269,12 @@
 									bottom : '0%',
 									right : '0%',
 									height : '15%',
-									width : '100%',
+									width : '70%',
 									opacity : '1',
-								    borderWidth : '2px',
-								    borderStyle : 'inset',
-		    						boxShadow : '1px 1px',
-		   							borderColor: 'silver',
+									borderWidth : '2px',
+									borderStyle : 'inset',
+									boxShadow : '1px 1px',
+									borderColor: 'silver',
 									background : 'white',
 									transition: 'all 4s ease-in',
 									transitionDuration : '4s'
@@ -284,10 +286,10 @@
 									right : '0%',
 									height : '85%',
 									width : '40%',
-								    borderWidth : '2px',
-								    borderStyle : 'outset',
-		    						boxShadow : '3px 3px 3px 3px',
-		   							borderColor: 'silver',
+							    borderWidth : '2px',
+							    borderStyle : 'outset',
+	    						boxShadow : '3px 3px 3px 3px',
+	   							borderColor: 'silver',
 									background : 'black',
 									transitionDelay: '4s',
 									transition: 'all 4s ease-in',
@@ -300,20 +302,20 @@
 									left : '0%',
 									height : '35%',
 									width : '60%',
-								    borderWidth : '2px',
-								    borderStyle : 'outset',
-		    						boxShadow : '3px 3px 3px 3px',
-		   							borderColor: 'silver',
+							    borderWidth : '2px',
+							    borderStyle : 'outset',
+	    						boxShadow : '3px 3px 3px 3px',
+	   							borderColor: 'silver',
 									opacity : '1',
 									background : 'white',
 									transitionDelay: '4s',
 									transition: 'all 4s ease-in',
 									transitionDuration : '4s'
-								},
+								}
 							})
 						this.readyForImages = true
 						this.startImageBoxes()
-						}.bind(this), 7000);
+					}.bind(this), 7000);
 					}
 				}
 
@@ -321,6 +323,17 @@
 					if(this.readyForImages == true){
 						setTimeout(function() {
 							this.setState({
+								returnButton : {
+									height: '15%',
+									width: '30%',
+									opacity: '0.5',
+									top: '85%',
+									left: '0%',
+									background: 'blue',
+									transition: 'all 4s ease-in',
+									transitionDuration : '4s',
+									position: 'fixed'
+								},
 								imgBoxStyle1 : {
 									position: 'relative',
 									top : '5%',
@@ -328,10 +341,10 @@
 									width : '20%',
 									height : '50%',
 									backgroundImage: "url('http://78.media.tumblr.com/af5167b7190ed722566528b98c7f3590/tumblr_o0v7k5TAW81teue7jo1_1280.jpg')",
-								    borderWidth : '2px',
-								    borderStyle : 'outset',
-		    						boxShadow : '3px 3px 3px 3px',
-		   							borderColor: 'silver',
+							    borderWidth : '2px',
+							    borderStyle : 'outset',
+	    						boxShadow : '3px 3px 3px 3px',
+	   							borderColor: 'silver',
 									opacity : '1',
 									transitionDelay: '1s',
 									transition: 'all 1s ease-in',
@@ -344,10 +357,10 @@
 									width : '20%',
 									height : '50%',
 									backgroundImage: "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFqLH1H2eYUP9bfvzF-Iz8CLdzghh72f1Vm17l7GD4KhbHbNjI')",
-								    borderWidth : '2px',
-								    borderStyle : 'outset',
-		    						boxShadow : '3px 3px 3px 3px',
-		   							borderColor: 'silver',
+							    borderWidth : '2px',
+							    borderStyle : 'outset',
+	    						boxShadow : '3px 3px 3px 3px',
+	   							borderColor: 'silver',
 									opacity : '1',
 									transitionDelay: '2s',
 									transition: 'all 2s ease-in',
@@ -360,10 +373,10 @@
 									width : '20%',
 									height : '50%',
 									backgroundImage: "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLT02zB6ZoRLAkGYqaUZYeRSkq8Q19zyH3YUq-uRYGdrtJ_sj4DQ')",
-								    borderWidth : '2px',
-								    borderStyle : 'outset',
-		    						boxShadow : '3px 3px 3px 3px',
-		   							borderColor: 'silver',
+							    borderWidth : '2px',
+							    borderStyle : 'outset',
+	    						boxShadow : '3px 3px 3px 3px',
+	   							borderColor: 'silver',
 									opacity : '1',
 									transitionDelay: '3s',
 									transition: 'all 3s ease-in',
@@ -376,10 +389,10 @@
 									width : '20%',
 									height : '50%',
 									backgroundImage: "url('https://vignette.wikia.nocookie.net/animal-jam-clans-1/images/a/a3/Header-photo-the-dirt.jpg/revision/latest?cb=20160319235120')",
-								    borderWidth : '2px',
-								    borderStyle : 'outset',
-		    						boxShadow : '3px 3px 3px 3px',
-		   							borderColor: 'silver',
+							    borderWidth : '2px',
+							    borderStyle : 'outset',
+	    						boxShadow : '3px 3px 3px 3px',
+	   							borderColor: 'silver',
 									opacity : '1',
 									transitionDelay: '4s',
 									transition: 'all 4s ease-in',
@@ -392,10 +405,10 @@
 									width : '100%',
 									height : '15%',
 									backgroundImage: "url('http://www.capstoneinfrastructure.com/Assets/Gallery/Website%20Enhancement/Goulais%20Bay/Beautiful%20sky.jpg')",
-								    borderWidth : '2px',
-								    borderStyle : 'outset',
-		    						boxShadow : '3px 3px 3px 3px',
-		   							borderColor: 'silver',
+							    borderWidth : '2px',
+							    borderStyle : 'outset',
+	    						boxShadow : '3px 3px 3px 3px',
+	   							borderColor: 'silver',
 									opacity : '1',
 									transitionDelay: '5s',
 									transition: 'all 5s ease-in',
@@ -414,10 +427,10 @@
 							width : '20%',
 							height : '50%',
 							background : 'red',
-						    borderWidth : '2px',
-						    borderStyle : 'inset',
-    						boxShadow : '5px 5px 5px 5px',
-   							borderColor: 'silver'
+					    borderWidth : '2px',
+					    borderStyle : 'inset',
+  						boxShadow : '5px 5px 5px 5px',
+ 							borderColor: 'silver'
 						}
 					})
 				}
@@ -430,10 +443,10 @@
 							width : '20%',
 							height : '50%',
 							background : 'purple',
-						    borderWidth : '2px',
-						    borderStyle : 'inset',
-    						boxShadow : '5px 5px 5px 5px',
-   							borderColor: 'silver'
+					    borderWidth : '2px',
+					    borderStyle : 'inset',
+  						boxShadow : '5px 5px 5px 5px',
+ 							borderColor: 'silver'
 						}
 					})
 				}
@@ -446,14 +459,12 @@
 							width : '20%',
 							height : '50%',
 							background : 'orange',
-						    borderWidth : '2px',
-						    borderStyle : 'inset',
-    						boxShadow : '5px 5px 5px 5px',
+					    borderWidth : '2px',
+					    borderStyle : 'inset',
+  						boxShadow : '5px 5px 5px 5px',
 							borderColor: 'silver'
 						}
 					})
-					var video = document.getElementById('video')
-					video.setAttribute('src', 'C:\Users\BAdams1\Desktop\siteFolder\mp4s\water.mp4.mp4')
 				}
 				imageBox4OnHover = () => {
 					this.setState({
@@ -464,10 +475,10 @@
 							width : '20%',
 							height : '50%',
 							background : 'green',
-						    borderWidth : '2px',
-						    borderStyle : 'inset',
-    						boxShadow : '5px 5px 5px 5px',
-								borderColor: 'silver'
+					    borderWidth : '2px',
+					    borderStyle : 'inset',
+  						boxShadow : '5px 5px 5px 5px',
+							borderColor: 'silver'
 						}
 					})
 				}
@@ -480,10 +491,10 @@
 							width : '100%',
 							height : '15%',
 							background : 'blue',
-						    borderWidth : '2px',
-						    borderStyle : 'inset',
-    						boxShadow : '5px 5px 5px 5px',
-   							borderColor: 'silver'
+					    borderWidth : '2px',
+					    borderStyle : 'inset',
+  						boxShadow : '5px 5px 5px 5px',
+ 							borderColor: 'silver'
 						}
 					})
 				}
@@ -496,10 +507,10 @@
 							width : '20%',
 							height : '50%',
 							background : 'red',
-						    borderWidth : '2px',
-						    borderStyle : 'outset',
-    						boxShadow : '3px 3px 3px 3px',
-   							borderColor: 'silver'
+					    borderWidth : '2px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver'
 						}
 					})
 				}
@@ -512,10 +523,10 @@
 							width : '20%',
 							height : '50%',
 							background : 'purple',
-						    borderWidth : '2px',
-						    borderStyle : 'outset',
-    						boxShadow : '3px 3px 3px 3px',
-   							borderColor: 'silver'
+					    borderWidth : '2px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver'
 						}
 					})
 				}
@@ -528,8 +539,8 @@
 							width : '20%',
 							height : '50%',
 							background : 'orange',
-						    borderWidth : '2px',
-						    borderStyle : 'outset',
+					    borderWidth : '2px',
+					    borderStyle : 'outset',
 							boxShadow : '3px 3px 3px 3px',
 							borderColor: 'silver'
 						}
@@ -544,10 +555,10 @@
 							width : '20%',
 							height : '50%',
 							background : 'green',
-						    borderWidth : '2px',
-						    borderStyle : 'outset',
+					    borderWidth : '2px',
+					    borderStyle : 'outset',
 							boxShadow : '3px 3px 3px 3px',
-								borderColor: 'silver'
+							borderColor: 'silver'
 						}
 					})
 				}
@@ -560,14 +571,624 @@
 							width : '100%',
 							height : '15%',
 							background : 'blue',
-						    borderWidth : '2px',
-						    borderStyle : 'outset',
-    						boxShadow : '3px 3px 3px 3px',
-   							borderColor: 'silver'
+					    borderWidth : '2px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver'
 						}
 					})
 				}
-
+				imgBox1Start = () => {
+					this.setState({
+						returnButton : {
+							height: '3%',
+					    width: '57%',
+					    top: '46.3%',
+					    position: 'fixed',
+					    left: '1.5%',
+							background: 'black',
+							opacity: '1',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						outerCircle1 : {
+							position : 'fixed',
+							borderRadius : '0%',
+							bottom : '0%',
+							right : '0%',
+							height : '15%',
+							width : '100%',
+							opacity : '1',
+							borderWidth : '2px',
+							borderStyle : 'inset',
+							boxShadow : '1px 1px',
+							borderColor: 'silver',
+							background : 'white',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle1 : {
+							position: 'fixed',
+							top : '45%',
+							left : '0%',
+							width : '60%',
+							height : '40%',
+							background : 'red',
+					    borderWidth : '8px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle2 : {
+							position: 'relative',
+							bottom : '14%',
+							left : '0%',
+							width : '23.8%',
+							height : '11%',
+							background : 'purple',
+					    borderWidth : '1px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle3 : {
+							position: 'relative',
+							top : '-27%',
+							left : '25%',
+							width : '23%',
+							height : '12.5%',
+							background : 'orange',
+					    borderWidth : '1px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle4 : {
+							position: 'relative',
+							top : '-38%',
+							left : '48.5%',
+							width : '24%',
+							height : '11%',
+							background : 'green',
+					    borderWidth : '1px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle5 : {
+							position: 'relative',
+							top : '-49%',
+							left : '73.5%',
+							width : '26%',
+							height : '12%',
+							background : 'gold',
+					    borderWidth : '1px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						}
+					})
+				}
+				imgBox2Start = () => {
+					this.setState({
+						returnButton : {
+							height: '3%',
+					    width: '57%',
+					    top: '46.3%',
+					    position: 'fixed',
+					    left: '1.5%',
+							background: 'black',
+							opacity: '1',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						outerCircle1 : {
+							position : 'fixed',
+							borderRadius : '0%',
+							bottom : '0%',
+							right : '0%',
+							height : '15%',
+							width : '100%',
+							opacity : '1',
+							borderWidth : '2px',
+							borderStyle : 'inset',
+							boxShadow : '1px 1px',
+							borderColor: 'silver',
+							background : 'white',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle2 : {
+							position: 'fixed',
+							top : '45%',
+							left : '0%',
+							width : '60%',
+							height : '40%',
+							background : 'red',
+					    borderWidth : '8px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle1 : {
+							position: 'relative',
+							bottom : '14%',
+							left : '0%',
+							width : '23.8%',
+							height : '11%',
+							background : 'purple',
+					    borderWidth : '1px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle3 : {
+							position: 'relative',
+							top : '-27%',
+							left : '25%',
+							width : '23%',
+							height : '12.5%',
+							background : 'orange',
+					    borderWidth : '1px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle4 : {
+							position: 'relative',
+							top : '-38%',
+							left : '48.5%',
+							width : '24%',
+							height : '11%',
+							background : 'green',
+					    borderWidth : '1px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle5 : {
+							position: 'relative',
+							top : '-49%',
+							left : '73.5%',
+							width : '26%',
+							height : '12%',
+							background : 'gold',
+					    borderWidth : '1px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						}
+					})
+				}
+				imgBox3Start = () => {
+					this.setState({
+						returnButton : {
+							height: '3%',
+					    width: '57%',
+					    top: '46.3%',
+					    position: 'fixed',
+					    left: '1.5%',
+							background: 'black',
+							opacity: '1',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						outerCircle1 : {
+							position : 'fixed',
+							borderRadius : '0%',
+							bottom : '0%',
+							right : '0%',
+							height : '15%',
+							width : '100%',
+							opacity : '1',
+							borderWidth : '2px',
+							borderStyle : 'inset',
+							boxShadow : '1px 1px',
+							borderColor: 'silver',
+							background : 'white',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle3 : {
+							position: 'fixed',
+							top : '45%',
+							left : '0%',
+							width : '60%',
+							height : '40%',
+							background : 'red',
+					    borderWidth : '8px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle1 : {
+							position: 'relative',
+							bottom : '14%',
+							left : '0%',
+							width : '23.8%',
+							height : '11%',
+							background : 'purple',
+					    borderWidth : '1px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle2 : {
+							position: 'relative',
+							top : '-27%',
+							left : '25%',
+							width : '23%',
+							height : '12.5%',
+							background : 'orange',
+					    borderWidth : '1px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle4 : {
+							position: 'relative',
+							top : '-38%',
+							left : '48.5%',
+							width : '24%',
+							height : '11%',
+							background : 'green',
+					    borderWidth : '1px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle5 : {
+							position: 'relative',
+							top : '-49%',
+							left : '73.5%',
+							width : '26%',
+							height : '12%',
+							background : 'gold',
+					    borderWidth : '1px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						}
+					})
+				}
+				imgBox4Start = () => {
+					this.setState({
+						returnButton : {
+							height: '3%',
+					    width: '57%',
+					    top: '46.3%',
+					    position: 'fixed',
+					    left: '1.5%',
+							background: 'black',
+							opacity: '1',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						outerCircle1 : {
+							position : 'fixed',
+							borderRadius : '0%',
+							bottom : '0%',
+							right : '0%',
+							height : '15%',
+							width : '100%',
+							opacity : '1',
+							borderWidth : '2px',
+							borderStyle : 'inset',
+							boxShadow : '1px 1px',
+							borderColor: 'silver',
+							background : 'white',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle4 : {
+							position: 'fixed',
+							top : '45%',
+							left : '0%',
+							width : '60%',
+							height : '40%',
+							background : 'red',
+					    borderWidth : '8px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle1 : {
+							position: 'relative',
+							bottom : '14%',
+							left : '0%',
+							width : '23.8%',
+							height : '11%',
+							background : 'purple',
+					    borderWidth : '1px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle2 : {
+							position: 'relative',
+							top : '-27%',
+							left : '25%',
+							width : '23%',
+							height : '12.5%',
+							background : 'orange',
+					    borderWidth : '1px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle3 : {
+							position: 'relative',
+							top : '-38%',
+							left : '48.5%',
+							width : '24%',
+							height : '11%',
+							background : 'green',
+					    borderWidth : '1px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle5 : {
+							position: 'relative',
+							top : '-49%',
+							left : '73.5%',
+							width : '26%',
+							height : '12%',
+							background : 'gold',
+					    borderWidth : '1px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						}
+					})
+				}
+				imgBox5Start = () => {
+					this.setState({
+						returnButton : {
+							height: '3%',
+					    width: '57%',
+					    top: '46.3%',
+					    position: 'fixed',
+					    left: '1.5%',
+							background: 'black',
+							opacity: '1',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						outerCircle1 : {
+							position : 'fixed',
+							borderRadius : '0%',
+							bottom : '0%',
+							right : '0%',
+							height : '15%',
+							width : '100%',
+							opacity : '1',
+							borderWidth : '2px',
+							borderStyle : 'inset',
+							boxShadow : '1px 1px',
+							borderColor: 'silver',
+							background : 'white',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle5 : {
+							position: 'fixed',
+							top : '45%',
+							left : '0%',
+							width : '60%',
+							height : '40%',
+							background : 'red',
+					    borderWidth : '8px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle1 : {
+							position: 'relative',
+							bottom : '14%',
+							left : '0%',
+							width : '23.8%',
+							height : '11%',
+							background : 'purple',
+					    borderWidth : '1px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle2 : {
+							position: 'relative',
+							top : '-27%',
+							left : '25%',
+							width : '23%',
+							height : '12.5%',
+							background : 'orange',
+					    borderWidth : '1px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle3 : {
+							position: 'relative',
+							top : '-38%',
+							left : '48.5%',
+							width : '24%',
+							height : '11%',
+							background : 'green',
+					    borderWidth : '1px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle4 : {
+							position: 'relative',
+							top : '-49%',
+							left : '73.5%',
+							width : '26%',
+							height : '12%',
+							background : 'gold',
+					    borderWidth : '1px',
+					    borderStyle : 'outset',
+  						boxShadow : '3px 3px 3px 3px',
+ 							borderColor: 'silver',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						}
+					})
+				}
+				returnImages = function(){
+					this.setState({
+						outerCircle1 : {
+							position : 'fixed',
+							borderRadius : '0%',
+							bottom : '0%',
+							right : '0%',
+							height : '15%',
+							width : '70%',
+							opacity : '1',
+							borderWidth : '2px',
+							borderStyle : 'inset',
+							boxShadow : '1px 1px',
+							borderColor: 'silver',
+							background : 'white',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						returnButton : {
+							height: '15%',
+							width: '30%',
+							opacity: '0.5',
+							top: '85%',
+							left: '0%',
+							background: 'blue',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s',
+							position: 'fixed'
+						},
+						imgBoxStyle1 : {
+							position: 'relative',
+							top : '5%',
+							left : '4%',
+							width : '20%',
+							height : '50%',
+							backgroundImage: "url('http://78.media.tumblr.com/af5167b7190ed722566528b98c7f3590/tumblr_o0v7k5TAW81teue7jo1_1280.jpg')",
+							borderWidth : '2px',
+							borderStyle : 'outset',
+							boxShadow : '3px 3px 3px 3px',
+							borderColor: 'silver',
+							opacity : '1',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle2 : {
+							position: 'relative',
+							bottom : '7%',
+							left : '28%',
+							width : '20%',
+							height : '50%',
+							backgroundImage: "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFqLH1H2eYUP9bfvzF-Iz8CLdzghh72f1Vm17l7GD4KhbHbNjI')",
+							borderWidth : '2px',
+							borderStyle : 'outset',
+							boxShadow : '3px 3px 3px 3px',
+							borderColor: 'silver',
+							opacity : '1',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle3 : {
+							position: 'relative',
+							top : '-95%',
+							left : '53%',
+							width : '20%',
+							height : '50%',
+							backgroundImage: "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLT02zB6ZoRLAkGYqaUZYeRSkq8Q19zyH3YUq-uRYGdrtJ_sj4DQ')",
+							borderWidth : '2px',
+							borderStyle : 'outset',
+							boxShadow : '3px 3px 3px 3px',
+							borderColor: 'silver',
+							opacity : '1',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle4 : {
+							position: 'relative',
+							top : '-107%',
+							left : '77%',
+							width : '20%',
+							height : '50%',
+							backgroundImage: "url('https://vignette.wikia.nocookie.net/animal-jam-clans-1/images/a/a3/Header-photo-the-dirt.jpg/revision/latest?cb=20160319235120')",
+							borderWidth : '2px',
+							borderStyle : 'outset',
+							boxShadow : '3px 3px 3px 3px',
+							borderColor: 'silver',
+							opacity : '1',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						},
+						imgBoxStyle5 : {
+							position: 'relative',
+							top : '-215%',
+							left : '0%',
+							width : '100%',
+							height : '15%',
+							backgroundImage: "url('http://www.capstoneinfrastructure.com/Assets/Gallery/Website%20Enhancement/Goulais%20Bay/Beautiful%20sky.jpg')",
+							borderWidth : '2px',
+							borderStyle : 'outset',
+							boxShadow : '3px 3px 3px 3px',
+							borderColor: 'silver',
+							opacity : '1',
+							transition: 'all 1s ease-in',
+							transitionDuration : '1s'
+						}
+					})
+				}
 					componentDidMount() {
 					}
 					componentWillReceiveProps(newProps) {
@@ -578,7 +1199,9 @@
 					componentWillUpdate(nextProps, nextState) {
 					}
 					componentDidUpdate(prevProps, prevState) {
-						this.startHomePage()
+						if (this.transitionToHomePage == true){
+							this.startHomePage()
+						}
 					}
 					componentWillUnmount() {
 			   		}
@@ -587,16 +1210,19 @@
 					return (
 						<div id='wrapper2' style={this.state.wrapperStyle}>
 							<div id='div1' style={this.state.outerCircle3}>
-								<div onMouseLeave={this.imageBox1HoverOut} onMouseEnter={this.imageBox1OnHover} style={this.state.imgBoxStyle1} id='imgBox1'></div>
-								<div onMouseLeave={this.imageBox2HoverOut} onMouseEnter={this.imageBox2OnHover} style={this.state.imgBoxStyle2} id='imgBox2'></div>
-								<div onMouseLeave={this.imageBox3HoverOut} onMouseEnter={this.imageBox3OnHover} style={this.state.imgBoxStyle3} id='imgBox3'></div>
-								<div onMouseLeave={this.imageBox4HoverOut} onMouseEnter={this.imageBox4OnHover} style={this.state.imgBoxStyle4} id='imgBox4'></div>
-								<div onMouseLeave={this.imageBox5HoverOut} onMouseEnter={this.imageBox5OnHover} style={this.state.imgBoxStyle5} id='imgBox5'></div>
+								<div /*onMouseLeave={this.imageBox1HoverOut} onMouseEnter={this.imageBox1OnHover}*/ onClick={this.imgBox1Start} style={this.state.imgBoxStyle1} id='imgBox1'>
+								</div>
+								<div /*onMouseLeave={this.imageBox2HoverOut} onMouseEnter={this.imageBox2OnHover}*/ onClick={this.imgBox2Start} style={this.state.imgBoxStyle2} id='imgBox2'>
+								</div>
+								<div  /*onMouseLeave={this.imageBox2HoverOut} onMouseEnter={this.imageBox2OnHover}*/ onClick={this.imgBox3Start} style={this.state.imgBoxStyle3} id='imgBox3'>
+								</div>
+								<div  /*onMouseLeave={this.imageBox2HoverOut} onMouseEnter={this.imageBox2OnHover}*/ onClick={this.imgBox4Start} style={this.state.imgBoxStyle4} id='imgBox4'>
+								</div>
+								<div  /*onMouseLeave={this.imageBox2HoverOut} onMouseEnter={this.imageBox2OnHover}*/ onClick={this.imgBox5Start} style={this.state.imgBoxStyle5} id='imgBox5'>
+								</div>
+								<button id='return_button' style={this.state.returnButton} onClick={this.returnImages}></button>
 							</div>
 							<div id='div2' style={this.state.outerCircle2}>
-								<video id='video'>
-					        <source id='mp4' src="http://media.w3.org/2010/05/sintel/trailer.mp4" type='video/mp4'/>
-					      </video>
 							</div>
 							<div id='div3' style={this.state.outerCircle1}>
 							</div>
