@@ -35,6 +35,15 @@
           super(props)
           this.buttonDuplicator = this.buttonDuplicator.bind(this)
           this.elementCounter = this.elementCounter.bind(this)
+          this.placeCustomTitles = this.placeCustomTitles.bind(this)
+          this.considerType = this.considerType.bind(this)
+          this.unformatMoney = this.unformatMoney.bind(this)
+          this.formatMoney = this.formatMoney.bind(this)
+          this.customTitles = this.customTitles.bind(this)
+          this.dateOwed = this.dateOwed.bind(this)
+          this.dateReceived = this.dateReceived.bind(this)
+          this.checkNames = this.checkNames.bind(this)
+          this.multipleElementCheckandRemove = this.multipleElementCheckandRemove.bind(this)
           this.state = {
             numberOfElements: 0,
             optionDivStyle: {
@@ -58,6 +67,7 @@
           this.buttonArray = []
         }
           counter = this.props.counter || 0
+          dateType = ''
           elementCounter = () => {
             this.counter++
             this.buttonDuplicator(this.counter)
@@ -75,41 +85,144 @@
               event.target.value = unFormattedNumber
               event.target.select()
           }
+          considerType = (event) => {
+            var a = event
+            return a
+          }
+          dateReceived = () => {
+            document.getElementById('budget_element_label').innerHTML = 'Income Element'
+            document.getElementById('date_type_display').innerHTML = 'Date Received'
+            var dropDownMenu = document.getElementById('dropDownMenu')
+            var check = dropDownMenu.childNodes[1]
+            if (document.getElementById('budget_element_label').hasChildNodes() || document.getElementById('date_type_display').hasChildNodes() || dropDownMenu.childNodes.length > 1){
+              if (document.getElementById('budget_element_label').children[1]){
+                document.getElementById('budget_element_label').removeChild(document.getElementById('budget_element_label').children[1])
+                document.getElementById('date_type_display').removeChild(document.getElementById('date_type_display').children[1])
+              }
+              if (dropDownMenu.children.length > 1){
+                var saveButton = dropDownMenu.childNodes[1]
+                dropDownMenu.removeChild(saveButton)
+              }
+            }
+          }
+          dateOwed = () => {
+            document.getElementById('budget_element_label').innerHTML = 'Expense Element'
+            document.getElementById('date_type_display').innerHTML = 'Due Date'
+            var dropDownMenu = document.getElementById('dropDownMenu')
+            if (document.getElementById('budget_element_label').hasChildNodes() || document.getElementById('date_type_display').hasChildNodes() || dropDownMenu.childNodes.length > 1){
+              if (document.getElementById('budget_element_label').children[1]){
+                document.getElementById('budget_element_label').removeChild(document.getElementById('budget_element_label').children[1])
+                document.getElementById('date_type_display').removeChild(document.getElementById('date_type_display').children[1])
+              }
+              if (dropDownMenu.children.length > 1){
+                var saveButton = dropDownMenu.childNodes[1]
+                dropDownMenu.removeChild(saveButton)
+              }
+            }
+          }
+          customTitles = () => {
+            var originalLabel = document.getElementById("budget_element_label")
+            var elementDescriptionInput = document.createElement("INPUT");
+            var dateDescriptionInput = document.createElement("INPUT");
+            var date_type_display = document.getElementById('date_type_display')
+            var typeDropdown = document.getElementById('dropDownMenu')
+            var saveButton = document.createElement('BUTTON')
+                elementDescriptionInput.setAttribute('placeholder', 'type custom name here')
+                elementDescriptionInput.setAttribute('class', 'form-group')
+                elementDescriptionInput.setAttribute('id', 'element_description')
+                dateDescriptionInput.setAttribute('placeholder', 'type custom date description here')
+                dateDescriptionInput.setAttribute('class', 'form-group')
+                dateDescriptionInput.setAttribute('id', 'date_description')
+                saveButton.setAttribute('class', 'btn btn-primary')
+                saveButton.addEventListener("click", this.placeCustomTitles)
+                saveButton.setAttribute('id', 'save_custom_button')
+                saveButton.innerHTML = 'save custom'
+                originalLabel.appendChild(elementDescriptionInput)
+                date_type_display.appendChild(dateDescriptionInput)
+                typeDropdown.appendChild(saveButton)
+                this.multipleElementCheckandRemove(originalLabel,date_type_display,typeDropdown)
+                elementDescriptionInput.focus()
+          }
+          multipleElementCheckandRemove = (originalLabel, date_type_display,typeDropdown) => {
+            if (originalLabel.childElementCount > 1 || typeDropdown.childElementCount > 2){
+              for (var childCounter = 1; childCounter < originalLabel.childElementCount; childCounter++){
+              var childToRemove = originalLabel.childNodes[childCounter]
+                originalLabel.removeChild(childToRemove)
+              }
+              for (var childCounter = 1; childCounter < date_type_display.childElementCount; childCounter++){
+              var childToRemove = date_type_display.childNodes[childCounter]
+                date_type_display.removeChild(childToRemove)
+              }
+              for (var childCounter = 1; childCounter < typeDropdown.childElementCount; childCounter++){
+              var childToRemove = typeDropdown.childNodes[childCounter]
+                typeDropdown.removeChild(childToRemove)
+              }
+            }
+          }
+
+          placeCustomTitles = () => {
+            var dateDescriptionInput = document.getElementById('date_description')
+            var elementDescriptionInput = document.getElementById('element_description')
+            var typeDropdown = document.getElementById('dropDownMenu')
+
+            if (elementDescriptionInput){
+
+              if (elementDescriptionInput){
+              var savedCustomElementTitle = elementDescriptionInput.value
+              } else {
+                var savedCustomElementTitle = document.getElementById('budget_element_label').innerHTML
+              }
+
+              if (dateDescriptionInput){
+                var savedCustomDateTitle = dateDescriptionInput.value
+              } else {
+                var savedCustomDateTitle = document.getElementById('date_type_display').innerHTML
+              }
+
+              if (this.checkNames(savedCustomElementTitle) && this.checkNames(savedCustomDateTitle)){
+                document.getElementById('budget_element_label').innerHTML = savedCustomElementTitle
+                document.getElementById('date_type_display').innerHTML = savedCustomDateTitle
+                typeDropdown.removeChild(typeDropdown.childNodes[1])
+              } else {
+                alert('must enter a title in both boxes or select another option')
+              }
+
+            }
+          }
+          checkNames = (labelToCheck) => {
+            if (labelToCheck == ''){
+              return false
+            } else return true
+          }
           buttonDuplicator = (numberOfButtons) => {
             var DropdownButton = ReactBootstrap.DropdownButton
             var ButtonToolbar = ReactBootstrap.ButtonToolbar
             var MenuItem = ReactBootstrap.MenuItem
-            for (let buttonCounter = 0; buttonCounter < numberOfButtons; buttonCounter++){
+            // for (let buttonCounter = 0; buttonCounter < numberOfButtons; buttonCounter++){
               this.buttonArray.push(
                 <tr>
                   <td>
                       <div id='form_wrapper' className="form-group" style={this.state.optionDivStyle}>
-                          <label for="usr">Title:</label>
-                          <input type="text" placeholder='Name' style={this.state.inputStyle} className="form-control" id="usr"></input>
-                          <input type="text" placeholder='Amount' onFocus={this.unformatMoney}  onBlur={this.formatMoney} style={this.state.inputStyle} className="form-control" id="usr"></input>
-                          <ButtonToolbar>
+                          <label id='budget_element_label' for="title">Budget Element</label>
+                          <input type="text" placeholder='Title' style={this.state.inputStyle} className="form-control" id="title"></input>
+                          <input type="text" placeholder='Amount' onFocus={this.unformatMoney}  onBlur={this.formatMoney} style={this.state.inputStyle} className="form-control" id="title"></input>
+                          <p id='date_type_display'></p>
+                          <input className="form-control" type="date" name="bday"></input>
+                          <ButtonToolbar id='dropDownMenu'>
                             <DropdownButton title="Type" id="dropdown-size-medium">
-                              <MenuItem eventKey="1">Income</MenuItem>
-                              <MenuItem eventKey="2">Expense</MenuItem>
+                              <MenuItem id='menu_item_income' onMouseEnter={this.dateReceived} eventKey="1">Income</MenuItem>
+                              <MenuItem id='menu_item_expense' onMouseEnter={this.dateOwed} eventKey="2">Expense</MenuItem>
                               <MenuItem divider />
-                              <MenuItem eventKey="3">Other</MenuItem>
+                              <MenuItem id='menu_item_other' onClick={this.customTitles} eventKey="3">Other</MenuItem>
                             </DropdownButton>
                           </ButtonToolbar>
                           <button style={this.state.saveButtonStyle} className="btn btn-primary">Save</button>
                           <button style={this.state.deleteButtonStyle} className="btn btn-danger">Delete</button>
                       </div>
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
                   </td>
                 </tr>
               )
-            }
+            // }
           }
         render(){
           return(
