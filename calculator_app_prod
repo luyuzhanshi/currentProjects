@@ -1,0 +1,220 @@
+///////////////////////////////////////////////////////////////////////////////
+//////// run tests
+///////////////////////////////////////////////////////////////////////////////
+var CalculatorApp = require('./calculator_app_project/calculator_app_tests.js')
+var calculatorApp = new CalculatorApp
+for (key in calculatorApp){
+  var testResult = calculatorApp[key]()
+  var result = testResult ? 'passed' : 'failed'
+  console.log(key + ': ' + result)
+}
+///////////////////////////////////////////////////////////////////////////////
+//////// App
+///////////////////////////////////////////////////////////////////////////////
+var CalculatorApp = function(defaultInput){
+  this.appSetup = function(defaultInput){
+		if(!defaultInput){
+			defaultInput = {}
+		}
+
+    if (!defaultInput.storedNumber){
+      defaultInput.storedNumber = ''
+    }
+
+    if (!defaultInput.firstNumber){
+      defaultInput.firstNumber = 0
+    }
+    if (!defaultInput.subsequentNumber){
+      defaultInput.subsequentNumber = ''
+    }
+    this.result = ''
+    this.operations = []
+    this.storedNumber = defaultInput.storedNumber
+    this.firstNumber = defaultInput.firstNumber
+    this.subsequentNumber = defaultInput.subsequentNumber
+    this.storeSubsequentNumber = false
+  }
+
+  this.determineInput = function(input){
+    var operatorArray = ['+','-','/','x']
+    for (operatorCounter = 0; operatorCounter < operatorArray.length; operatorCounter++){
+      var operator = operatorArray[operatorCounter]
+      if (this.storeSubsequentNumber == true){
+        this.storeSubsequentNum(input, operator, operatorCounter, operatorArray.length)
+      }
+      if (this.storeSubsequentNumber == false){
+        this.storeFirstNumber(input, operator, operatorCounter, operatorArray.length)
+      }
+    }
+  }
+
+  this.storeFirstNumber = function(input, operator, operatorCounter, operatorLength){
+    if (input == '='){
+      this.rebuildArrayForCalculations()
+      this.result = this.calculate()
+    }
+    if (input == operator){
+      this.storeSubsequentNumber = true
+      this.firstNumber = this.parsedNumber(this.storedNumber)
+      this.operations.push({
+        number : this.firstNumber,
+        operator : operator
+      })
+      this.firstNumber = ''
+    }
+    if (input !== operator && operatorCounter == operatorLength - 1){
+      this.storedNumber += input
+    }
+  }
+
+  this.storeSubsequentNum = function(input, operator, operatorCounter, operatorLength){
+    if (input == '='){
+      this.rebuildArrayForCalculations()
+      this.result = this.calculate()
+    }
+    if (input == operator){
+      this.storeSubsequentNumber = false
+      this.subsequentNumber = this.parsedNumber(this.storedNumber)
+      this.operations.push({
+        number : this.subsequentNumber,
+        operator : operator
+      })
+    }
+    if (input !== operator && operatorCounter == operatorLength - 1){
+      this.storedNumber += input
+    }
+  }
+
+  this.parsedNumber = function(input){
+    var number = parseFloat(input)
+    if (!isNaN(number)){
+      this.storedNumber = ''
+      return number
+    }
+  }
+
+    this.rebuildArrayForCalculations = function(){
+      for (multiplicationCounter = 0; multiplicationCounter < this.operations.length; multiplicationCounter++){
+        var mdas = this.operations[multiplicationCounter].operator == '/'
+        if (mdas){
+          var divisionOperation = this.operations[multiplicationCounter]
+          this.operations.splice(multiplicationCounter, 1)
+          this.operations.unshift(divisionOperation)
+        }
+      }
+      for (divisionCounter = 0; divisionCounter < this.operations.length; divisionCounter++){
+        var das = this.operations[divisionCounter].operator == 'x'
+        if (das){
+          var multiplicationOperation = this.operations[divisionCounter]
+          this.operations.splice(divisionCounter, 1)
+          this.operations.unshift(multiplicationOperation)
+        }
+      }
+    }
+
+
+    this.calculate = function(){
+      for (calculationCounter = 0; calculationCounter < this.operations.length; calculationCounter++){
+        var leftSideNumber = this.operations[calculationCounter]
+        var rightSideNumber = this.operations[calculationCounter + 1]
+        var operationToPerform = this.operations[calculationCounter].operator
+        var result = leftSideNumber + operationToPerform + rightSideNumber
+        return result
+      }
+    }
+  }
+
+  this.appSetup(defaultInput)
+}
+module.exports = CalculatorApp
+///////////////////////////////////////////////////////////////////////////////
+//////// App Tests
+///////////////////////////////////////////////////////////////////////////////
+var CalculatorApp = require('./calculator_app.js')
+var CalculatorAppTests = function(){
+  this['constructor works'] = function(){
+    var calculatorApp = new CalculatorApp()
+    var expected = 0
+    var actual = calculatorApp.firstNumber
+    var result = actual == expected
+    return result
+  }
+  this['calculator can parse strings into numbers'] = function(){
+    var calculatorApp = new CalculatorApp()
+    var expected = 2
+    calculatorApp.determineInput('2')
+    var actual = calculatorApp.storedNumber
+    var result = actual == expected
+    return result
+  }
+  this['calculator can parse strings into numbers when operator is detected'] = function(){
+    var calculatorApp = new CalculatorApp()
+    var expected = 25
+    calculatorApp.determineInput('2')
+    calculatorApp.determineInput('5')
+    calculatorApp.determineInput('+')
+    var actual = calculatorApp.firstNumber
+    var result = actual == expected
+    return result
+  }
+  this['calculator can store subsequent numbers'] = function(){
+    var calculatorApp = new CalculatorApp()
+    var expected = 5
+    calculatorApp.determineInput('2')
+    calculatorApp.determineInput('x')
+    calculatorApp.determineInput('5')
+    var actual = calculatorApp.storedNumber
+    var result = actual == expected
+    return result
+  }
+  this['calculator can perform basic operations'] = function(){
+    var calculatorApp = new CalculatorApp()
+    var expected = 10
+    calculatorApp.determineInput('2')
+    calculatorApp.determineInput('x')
+    calculatorApp.determineInput('5')
+    calculatorApp.determineInput('=')
+    var actual = calculatorApp.result
+    var result = actual == expected
+    return result
+  }
+}
+module.exports = CalculatorAppTests
+// this['test one'] = function(){
+//   var calculatorApp = new CalculatorApp
+//   var expected =
+//   var actual = calculatorApp.
+//   var result = actual == expected
+//   return result
+// }
+///////////////////////////////////////////////////////////////////////////////
+//////// HTML debugger
+///////////////////////////////////////////////////////////////////////////////
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Click the button to display the extracted part of the string.</p>
+
+<button onclick="myFunction()">Try it</button>
+<p id="original"></p>
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+var string = '"aaa"'
+var locOne = string.charAt(0)
+var locTwo = string.charAt(string.length - 1)
+document.getElementById("original").innerHTML = string
+    if (locOne == '"'){
+    	var string = string.slice(0, 1)
+    }
+    if (locTwo == '"'){
+    	var string = string.slice(string.length - 1, 1)
+    }
+    document.getElementById("demo").innerHTML = string;
+}
+</script>
+
+</body>
+</html>
